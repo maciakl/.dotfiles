@@ -23,3 +23,4 @@ alias la='ls -A'
 alias l='ls -CF'
 alias du="du -kh"
 alias df="df -hTh"
+alias diff="colordiff -u"

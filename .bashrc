@@ -17,6 +17,11 @@ if [ "$TERM" != "dumb" ]; then
     alias dir='ls --color=auto --format=long'
 fi
 
+# if ~/scripts exists, add it to the path
+if [ -d ~/scripts ] ; then
+    PATH=~/scripts:"${PATH}"
+fi
+
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
@@ -24,3 +29,4 @@ alias l='ls -CF'
 alias du="du -kh"
 alias df="df -hTh"
 alias diff="colordiff -u"
+alias ggrep="grep --recursive --line-number"

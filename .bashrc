@@ -43,7 +43,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[0
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
+    command -v dircolors >/dev/null 2>&1 && eval "`dircolors -b`"
     alias ls='ls -hF --color=auto'
     alias dir='ls --color=auto --format=long'
 fi

@@ -43,8 +43,13 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[0
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
+    # dircolors doesn't seem to exist on my mac (adds color to ls)
     command -v dircolors >/dev/null 2>&1 && eval "`dircolors -b`"
+    
+    # force ls to always use color and typ indicators
     alias ls='ls -hF --color=auto'
+
+    # make the dir command work kinda like in windows (long format)
     alias dir='ls --color=auto --format=long'
 fi
 
@@ -57,8 +62,12 @@ fi
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
+
+# make du and dh human readable
 alias du="du -kh"
 alias df="df -hTh"
+
+# recursive grep alternative
 alias ggrep="grep --recursive --line-number"
 
 # digg checks against opendns server

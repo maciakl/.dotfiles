@@ -74,6 +74,9 @@ alias ggrep="grep --recursive --line-number"
 # digg checks against opendns server
 alias digg="dig @208.67.222.222"
 
+# force tmux to execute in 256 color mode
+command -v tmux >/dev/null 2>&1 && alias tmux="tmux -2"
+
 # use colordiff instead of diff if available
 command -v colordiff >/dev/null 2>&1 && alias diff="colordiff -u"
 

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Run this on new machines to set up the environment
+
+H=$HOME
+D=$HOME/.dotfiles
+B=$H/backup_dotfiles
+
+# create backup dir if one doesn't already exist
+if [ ! -d $B ]; then mkdir $B; fi
+
+# move all the dotfiles to backup dir
+if [ -f $H/.colordiffrc ]; then mv $H/.colordiffrc $B/.colordiffrc; fi
+if [ -f $H/.screenrc ]; then mv $H/.screenrc $B/.screenrc; fi
+if [ -f $H/.tmux.conf ]; then mv $H/.tmux.conf $B/.tmux.conf; fi
+if [ -f $H/.bashrc ]; then mv $H/.bashrc $B/.bashrc; fi
+
+# link all the dotfiles
+ln -s $D/.colordiffrc $H/.colordiffrc
+ln -s $D/.screenrc $H/.screenrc
+ln -s $D/.tmux.conf $H/.tmux.conf
+
+
+# special rules for bashrc (respect local)
+if [ -f $B/.bashrc ]; then
+    # if bashrc exists, use it but source the dotfiles one first
+    { echo "source $D/.bashrc"; cat $B/.bashrc; } | tee $H/.bashrc > /dev/null
+else
+    # else just link 
+    ln -s $D/.bashrc $H/.bashrc
+fi

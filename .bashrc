@@ -4,8 +4,9 @@ export DOTFILES="$HOME/.dotfiles"
 export BC_ENV_ARGS="-l $DOTFILES/extensions.bc $DOTFILES/scientific_constants.bc"
 
 # save all the histories
-export HISTFILESIZE=100000
-export HISTSIZE=10000
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+export HISTFILE="$HOME/.history"
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups

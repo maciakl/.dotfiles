@@ -76,7 +76,7 @@ IWhite="\e[0;97m"
 ##################
 
 # Status of last command (for prompt)
-__stat() { if [ $? -eq 0 ]; then echo -ne "$Green✔"; else echo -en "$Red✘"; fi }
+__stat() { if [ $? -eq 0 ]; then echo -en "$Green[✔]"; else echo -en "$Red[✘]"; fi }
 
 # Display the branch name of git repository
 #   Green   ->  clean
@@ -112,8 +112,9 @@ function __git_prompt() {
 # Comment out any lines you don't like
 # It's modular!
 
+PS1="" 
 # command status (shows check-mark or red x if last command failed)
-PS1=' $(__stat)'$Color_Off" " 
+PS1+=' $(__stat) '$Color_Off
 
 # debian chroot stuff (take it or leave it)
 PS1+="${debian_chroot:+($debian_chroot)}"
@@ -121,11 +122,11 @@ PS1+="${debian_chroot:+($debian_chroot)}"
 # basic information (user@host:path)
 PS1+="$BRed\u$Color_Off@$BRed\h$Color_Off:$BPurple\w$Color_Off "
 
-# if git is installed add git display to prompt
-command -v git >/dev/null 2>&1 && PS1+=$BGreen'$(__git_prompt)'$Color_Off
+# add git display to prompt
+command -v dircolors >/dev/null 2>&1 && PS1+=$BGreen'$(__git_prompt)'$Color_Off
 
 # prompt $ or # for root
-PS1+="\$ "
+PS1+="\$"
 
 export PS1
 

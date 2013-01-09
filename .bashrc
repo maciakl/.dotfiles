@@ -126,7 +126,7 @@ PS1+="$BRed\u$Color_Off@$BRed\h$Color_Off:$BPurple\w$Color_Off "
 command -v dircolors >/dev/null 2>&1 && PS1+=$BGreen'$(__git_prompt)'$Color_Off
 
 # prompt $ or # for root
-PS1+="\$"
+PS1+="\$ "
 
 export PS1
 

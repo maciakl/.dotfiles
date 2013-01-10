@@ -26,6 +26,8 @@ export GREP_OPTIONS='--color=auto'
 shopt -s histappend     # merge session histories
 shopt -s cmdhist        # combine multiline commands in history
 shopt -s cdspell        # cd tries to fix typos
+shopt -s dirspell        # cd tries to fix typos
+shopt -s autocd
 shopt -s checkwinsize   # resize ouput to fit window
 
 ### COLORED MAN PAGES ###

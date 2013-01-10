@@ -1,7 +1,9 @@
 # where the dotfiles at
 export DOTFILES="$HOME/.dotfiles"
 
-export BC_ENV_ARGS="-l $DOTFILES/extensions.bc $DOTFILES/scientific_constants.bc"
+export TERM="screen-256color"
+
+BC_ENV_ARGS="-l $DOTFILES/extensions.bc $DOTFILES/scientific_constants.bc"
 
 # save all the histories
 export HISTFILESIZE=1000000
@@ -114,7 +116,7 @@ function __git_prompt() {
 
 PS1="" 
 # command status (shows check-mark or red x if last command failed)
-PS1+=' $(__stat) '$Color_Off
+PS1+='$(__stat) '$Color_Off
 
 # debian chroot stuff (take it or leave it)
 PS1+="${debian_chroot:+($debian_chroot)}"
@@ -164,6 +166,8 @@ alias digg="dig @208.67.222.222"
 
 # force tmux to execute in 256 color mode
 command -v tmux >/dev/null 2>&1 && alias tmux="tmux -2"
+
+command -v phpunit >/dev/null 2>&1 && alias phpunit="phpunit --colors"
 
 # use colordiff instead of diff if available
 command -v colordiff >/dev/null 2>&1 && alias diff="colordiff -u"

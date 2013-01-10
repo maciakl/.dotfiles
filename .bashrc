@@ -11,15 +11,15 @@ export HISTSIZE=1000000
 export HISTFILE="$HOME/.history"
 
 # don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=ignoredups
+
 
 # ... and ignore same successive entries.
-export HISTCONTROL=ignoreboth
+
 
 # Ctrl+D must be pressed twice to get out
-export IGNOREEOF=1
 
-# enable color for GREP
+
+    # enable color for GREP
 export GREP_OPTIONS='--color=auto'
 
 # shell options
@@ -56,18 +56,10 @@ Cyan="\033[0;36m"
 White="\033[0;37m"
 
 BRed="\033[1;31m"
-BGreen="\033[1;32m"
+BGreen="\033[1;"
 BYellow="\033[1;33m"
 BBlue="\033[1;34m"
 BPurple="\033[1;35m"
-
-On_Red="\033[41m"
-On_Green="\033[42m"
-On_Yellow="\033[43m"
-On_Blue="\033[44m"
-On_Purple="\033[45m"
-On_Cyan="\033[46m"
-On_White="\033[47m"
 
 IRed="\033[0;91m"
 IGreen="\033[0;92m"
@@ -77,17 +69,27 @@ IPurple="\033[0;95m"
 ICyan="\033[0;96m" 
 IWhite="\033[0;97m"
 
+
 ##################
 
-# Status of last command (for prompt)
-__stat() { if [ $? -eq 0 ]; then echo -en "$Green[✔]"; else echo -en "$Red[✘]"; fi }
+function __prompt_command()
+{
+    EXIT="$?"
+    PS1=""
 
-# Display the branch name of git repository
-#   Green   ->  clean
-#   purple  ->  untracked files
-#   red     ->  files to commit
-function __git_prompt() {
+    if [ $EXIT -eq 0 ]; then PS1+="\[$Green\][\!]\[$Color_Off\] "; else  PS1+="\[$Red\][\!]\[$Color_Off\] "; fi
+    #PS1+="[OK] "
 
+    # debian chroot stuff (take it or leave it)
+    PS1+="${debian_chroot:+($debian_chroot)}"
+
+    # basic information (user@host:path)
+    PS1+="\[$BRed\]\u\[$Color_Off\]@\[$BRed\]\h\[$Color_Off\]:\[$BPurple\]\w\[$Color_Off\] "
+
+    # Display the branch name of git repository
+    #   Green   ->  clean
+    #   purple  ->  untracked files
+    #   red     ->  files to commit
     local git_status="`git status -unormal 2>&1`"
 
     if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
@@ -105,34 +107,15 @@ function __git_prompt() {
             branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null ||
                 echo HEAD`)"
         fi
-        echo -ne "$Color_On[$branch]$Color_Off "
+
+        PS1+="\[$Color_On\][$branch]\[$Color_Off\] "
     fi
+
+    # prompt $ or # for root
+    PS1+="\[$Color_Off\]\$ "
 }
 
-#####################
-#### BASH PROMPT ####
-#####################
-
-# Comment out any lines you don't like
-# It's modular!
-
-PS1="" 
-# command status (shows check-mark or red x if last command failed)
-PS1+='$(__stat) '$Color_Off
-
-# debian chroot stuff (take it or leave it)
-PS1+="${debian_chroot:+($debian_chroot)}"
-
-# basic information (user@host:path)
-PS1+="$BRed\u$Color_Off@$BRed\h$Color_Off:$BPurple\w$Color_Off "
-
-# add git display to prompt
-command -v git >/dev/null 2>&1 && PS1+=$BGreen'$(__git_prompt)'$Color_Off
-
-# prompt $ or # for root
-PS1+="\$ "
-
-export PS1
+PROMPT_COMMAND=__prompt_command
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then

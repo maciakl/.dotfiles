@@ -43,37 +43,37 @@ export LESS="-iXR"
 
 #### COLOR CODES ####
 
-Color_Off="\e[0m"
+Color_Off="\033[0m"
 
-Red="\e[0;31m"
-Green="\e[0;32m"
-Yellow="\e[0;33m"
-Blue="\e[0;34m"
-Purple="\e[0;35m"
-Cyan="\e[0;36m"
-White="\e[0;37m"
+Red="\033[0;31m"
+Green="\033[0;32m"
+Yellow="\033[0;33m"
+Blue="\033[0;34m"
+Purple="\033[0;35m"
+Cyan="\033[0;36m"
+White="\033[0;37m"
 
-BRed="\e[1;31m"
-BGreen="\e[1;32m"
-BYellow="\e[1;33m"
-BBlue="\e[1;34m"
-BPurple="\e[1;35m"
+BRed="\033[1;31m"
+BGreen="\033[1;32m"
+BYellow="\033[1;33m"
+BBlue="\033[1;34m"
+BPurple="\033[1;35m"
 
-On_Red="\e[41m"
-On_Green="\e[42m"
-On_Yellow="\e[43m"
-On_Blue="\e[44m"
-On_Purple="\e[45m"
-On_Cyan="\e[46m"
-On_White="\e[47m"
+On_Red="\033[41m"
+On_Green="\033[42m"
+On_Yellow="\033[43m"
+On_Blue="\033[44m"
+On_Purple="\033[45m"
+On_Cyan="\033[46m"
+On_White="\033[47m"
 
-IRed="\e[0;91m"
-IGreen="\e[0;92m"
-IYellow="\e[0;93m"
-IBlue="\e[0;94m" 
-IPurple="\e[0;95m"
-ICyan="\e[0;96m" 
-IWhite="\e[0;97m"
+IRed="\033[0;91m"
+IGreen="\033[0;92m"
+IYellow="\033[0;93m"
+IBlue="\033[0;94m" 
+IPurple="\033[0;95m"
+ICyan="\033[0;96m" 
+IWhite="\033[0;97m"
 
 ##################
 
@@ -125,7 +125,7 @@ PS1+="${debian_chroot:+($debian_chroot)}"
 PS1+="$BRed\u$Color_Off@$BRed\h$Color_Off:$BPurple\w$Color_Off "
 
 # add git display to prompt
-command -v dircolors >/dev/null 2>&1 && PS1+=$BGreen'$(__git_prompt)'$Color_Off
+command -v git >/dev/null 2>&1 && PS1+=$BGreen'$(__git_prompt)'$Color_Off
 
 # prompt $ or # for root
 PS1+="\$ "

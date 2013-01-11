@@ -78,7 +78,7 @@ function __prompt_command()
     if [ $EXIT -eq 0 ]; then PS1+="\[$Green\][\!]\[$Color_Off\] "; else  PS1+="\[$Red\][\!]\[$Color_Off\] "; fi
 
     # if logged in via ssh shows the ip of the client
-    if [ -n "$SSH_CLIENT" ]; then PS1+="\[$Yellow\](ssh)\[$Color_Off\]"; fi
+    if [ -n "$SSH_CLIENT" ]; then PS1+="\[$Yellow\]("${SSH_CLIENT%% *}") \[$Color_Off\]"; fi
     
     # debian chroot stuff (take it or leave it)
     PS1+="${debian_chroot:+($debian_chroot)}"

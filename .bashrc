@@ -16,7 +16,7 @@ export HISTFILE="$HOME/.history"
 export HISTCONTROL=ignoreboth
 
 # Ctrl+D must be pressed twice to get out
-port IGNOREEOF=1
+export IGNOREEOF=1
 
 #enable color for GREP
 export GREP_OPTIONS='--color=auto'

@@ -1,8 +1,10 @@
 # where the dotfiles at
 export DOTFILES="$HOME/.dotfiles"
 
+# ensure terminal is 256 colors
 export TERM="screen-256color"
 
+# enable extensions for bc
 BC_ENV_ARGS="-l $DOTFILES/extensions.bc $DOTFILES/scientific_constants.bc"
 
 # save all the histories
@@ -11,15 +13,12 @@ export HISTSIZE=1000000
 export HISTFILE="$HOME/.history"
 
 # don't put duplicate lines in the history. See bash(1) for more options
-
-
-# ... and ignore same successive entries.
-
+export HISTCONTROL=ignoreboth
 
 # Ctrl+D must be pressed twice to get out
+port IGNOREEOF=1
 
-
-    # enable color for GREP
+#enable color for GREP
 export GREP_OPTIONS='--color=auto'
 
 # shell options
@@ -43,10 +42,9 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # ignore case, long prompt, exit if it fits on one screen, allow colors for ls and grep
 export LESS="-iXR"
 
-#### COLOR CODES ####
-
+###COLOR-CODES####
 Color_Off="\033[0m"
-
+###-Regular-###
 Red="\033[0;31m"
 Green="\033[0;32m"
 Yellow="\033[0;33m"
@@ -54,13 +52,13 @@ Blue="\033[0;34m"
 Purple="\033[0;35m"
 Cyan="\033[0;36m"
 White="\033[0;37m"
-
+####-Bold-####
 BRed="\033[1;31m"
 BGreen="\033[1;"
 BYellow="\033[1;33m"
 BBlue="\033[1;34m"
 BPurple="\033[1;35m"
-
+###-Intensive-###
 IRed="\033[0;91m"
 IGreen="\033[0;92m"
 IYellow="\033[0;93m"
@@ -68,18 +66,20 @@ IBlue="\033[0;94m"
 IPurple="\033[0;95m"
 ICyan="\033[0;96m" 
 IWhite="\033[0;97m"
-
-
 ##################
 
+# set up command prompt
 function __prompt_command()
 {
+    # capture the exit status of the last command
     EXIT="$?"
     PS1=""
 
     if [ $EXIT -eq 0 ]; then PS1+="\[$Green\][\!]\[$Color_Off\] "; else  PS1+="\[$Red\][\!]\[$Color_Off\] "; fi
-    #PS1+="[OK] "
 
+    # if logged in via ssh shows the ip of the client
+    if [ -n "$SSH_CLIENT" ]; then PS1+="\[$Yellow\](ssh)\[$Color_Off\]"; fi
+    
     # debian chroot stuff (take it or leave it)
     PS1+="${debian_chroot:+($debian_chroot)}"
 
@@ -112,9 +112,8 @@ function __prompt_command()
     fi
 
     # prompt $ or # for root
-    PS1+="\[$Color_Off\]\$ "
+    PS1+="\$ "
 }
-
 PROMPT_COMMAND=__prompt_command
 
 # enable color support of ls and also add handy aliases

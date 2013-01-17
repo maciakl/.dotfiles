@@ -1,0 +1,16 @@
+[user]
+	name = Lukasz Grzegorz Maciak
+	email = CHANGEME
+[github]
+	user = maciakl
+	token = CHANGEME
+
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+	interactive = auto
+[push]
+	default = simple
+[url "https://"]
+	insteadOf = git://

@@ -142,6 +142,9 @@ alias l='ls -CF'
 alias du="du -kh"
 alias df="df -hTh"
 
+# make a directory and cd into it in a single command
+md() { mkdir -p "$@" && cd "$_"; }
+
 # recursive grep alternative
 alias ggrep="grep --recursive --line-number"
 

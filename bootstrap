@@ -29,3 +29,6 @@ else
     # else just link 
     ln -s $D/.bashrc $H/.bashrc
 fi
+
+# source .bashrc
+source $H/.bashrc

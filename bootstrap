@@ -20,6 +20,11 @@ ln -s $D/.colordiffrc $H/.colordiffrc
 ln -s $D/.screenrc $H/.screenrc
 ln -s $D/.tmux.conf $H/.tmux.conf
 
+if [ $(uname -s) == "Darwin" ]; then
+    
+    if [ -f $H/.profile ]; then mv $H/.profile $B/.profile; fi
+    ln -s $D/.profile_mac $H/.profile
+fi
 
 # special rules for bashrc (respect local)
 if [ -f $B/.bashrc ]; then

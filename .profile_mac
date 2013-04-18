@@ -1,0 +1,21 @@
+source ~/.dotfiles/.bashrc
+
+# Enable colorful ls
+export CLICOLOR=1
+
+# override my usual alias for GNU ls
+alias ls="ls -hGF"
+alias ll="ls -Gl"
+alias which="type -a"
+alias ..="cd .."
+alias dir="ls -lhGF"
+
+alias ctags="`brew --prefix`/bin/ctags"
+alias sed="`brew --prefix`/bin/gsed"
+
+alias chrome="/usr/bin/open /Applications/Google\ Chrome.app"
+
+alias gvim="mvim"
+
+export JOURNAL_BROWSER="open /Applications/Google\ Chrome.app"
+export JOURNAL_DIR=/Users/luke/Dropbox/Apps/Markdown\ Journal

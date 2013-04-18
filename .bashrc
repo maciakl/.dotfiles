@@ -161,3 +161,6 @@ command -v colordiff >/dev/null 2>&1 && alias diff="colordiff -u"
 
 # use htop instead of top if installed 
 command -v htop >/dev/null 2>&1 && alias top=htop
+
+
+[ -f ~/.bashrc_local ] && source ~/.bashrc_local

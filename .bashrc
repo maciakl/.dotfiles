@@ -151,6 +151,9 @@ alias ggrep="grep --recursive --line-number"
 # digg checks against opendns server
 alias digg="dig @208.67.222.222"
 
+# Open in existing vim
+alias gvimm="gvim --remote-silent"
+
 # force tmux to execute in 256 color mode
 command -v tmux >/dev/null 2>&1 && alias tmux="tmux -2"
 

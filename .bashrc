@@ -152,8 +152,15 @@ alias ggrep="grep --recursive --line-number"
 alias digg="dig @208.67.222.222"
 
 # Open in existing vim
-alias g="gvim --remote-silent"
+alias gv="gvim --remote-silent"
+
+# Start named session
 alias gd="gvim --servername DEV"
+
+# Attach buffer to the named session
+alias g="gvim --servername DEV --remote-silent"
+
+# Create randomly named session for this buffer
 alias gr="gvim --servername $$"
 
 # force tmux to execute in 256 color mode

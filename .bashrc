@@ -152,8 +152,9 @@ alias ggrep="grep --recursive --line-number"
 alias digg="dig @208.67.222.222"
 
 # Open in existing vim
-alias gvimm="gvim --remote-silent"
-alias gdev="gvim --servername DEV"
+alias g="gvim --remote-silent"
+alias gd="gvim --servername DEV"
+alias gr="gvim --servername $$"
 
 # force tmux to execute in 256 color mode
 command -v tmux >/dev/null 2>&1 && alias tmux="tmux -2"

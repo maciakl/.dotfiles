@@ -153,6 +153,7 @@ alias digg="dig @208.67.222.222"
 
 # Open in existing vim
 alias gvimm="gvim --remote-silent"
+alias gdev="gvim --servername DEV"
 
 # force tmux to execute in 256 color mode
 command -v tmux >/dev/null 2>&1 && alias tmux="tmux -2"

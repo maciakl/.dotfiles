@@ -151,17 +151,24 @@ alias ggrep="grep --recursive --line-number"
 # digg checks against opendns server
 alias digg="dig @208.67.222.222"
 
+##### VIM ALIASES ####
+
 # Open in existing vim
 alias gv="gvim --remote-silent"
 
-# Start named session
-alias gd="gvim --servername DEV"
+# Start a named session
+alias gvims="gvim --servername "
 
-# Attach buffer to the named session
+# Start DEV session
+alias gd="gvim --servername DEV"
+# Attach buffer to the DEV session
 alias g="gvim --servername DEV --remote-silent"
 
-# Create randomly named session for this buffer
-alias gr="gvim --servername $$"
+gvimdel() {
+    if [ -f $HOME/.vimsessions/GVIM.session.vim ]; then
+        rm $HOME/.vimsessions/GVIM.session.vim
+    fi
+}
 
 # force tmux to execute in 256 color mode
 command -v tmux >/dev/null 2>&1 && alias tmux="tmux -2"

@@ -1,16 +1,14 @@
-[user]
-	name = Lukasz Grzegorz Maciak
-	email = CHANGEME
-[github]
-	user = maciakl
-	token = CHANGEME
-
 [color]
 	branch = auto
 	diff = auto
 	status = auto
 	interactive = auto
-[push]
-	default = simple
-[url "https://"]
-	insteadOf = git://
+
+[alias]
+    assume   = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+
+    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+
+    ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short

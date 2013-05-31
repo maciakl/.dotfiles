@@ -14,11 +14,16 @@ if [ -f $H/.colordiffrc ]; then mv $H/.colordiffrc $B/.colordiffrc; fi
 if [ -f $H/.screenrc ]; then mv $H/.screenrc $B/.screenrc; fi
 if [ -f $H/.tmux.conf ]; then mv $H/.tmux.conf $B/.tmux.conf; fi
 if [ -f $H/.bashrc ]; then mv $H/.bashrc $B/.bashrc; fi
+if [ -f $H/.gitconfig ]; then mv $H/.gitconfig $B/.gitconfig; fi
 
 # link all the dotfiles
 ln -s $D/.colordiffrc $H/.colordiffrc
 ln -s $D/.screenrc $H/.screenrc
 ln -s $D/.tmux.conf $H/.tmux.conf
+
+# configure git
+cat $D/.gitconfig > $H/.gitconfig
+if [ -f $H/.gitconfig.local ]; then cat $H/.gitconfig.local >> $H/.gitconfig; fi
 
 if [ $(uname -s) == "Darwin" ]; then
     

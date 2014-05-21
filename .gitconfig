@@ -1,8 +1,11 @@
 [color]
-	branch = auto
-	diff = auto
-	status = auto
-	interactive = auto
+	branch = always
+	diff = always
+	status = always
+	interactive = always
+
+[push]
+    default = upstream
 
 [alias]
     assume   = update-index --assume-unchanged

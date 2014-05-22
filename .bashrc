@@ -89,6 +89,9 @@ function __prompt_command()
     # Display the branch name of git repository
     #   Green   ->  clean
     #   purple  ->  untracked files
+    #   cyan    ->  staged files
+    #   ired    ->  some staged, some modified
+    #   yellow  ->  staged files, and some untracked
     #   red     ->  files to commit
     local git_status="`git status -unormal 2>&1`"
 
@@ -97,6 +100,12 @@ function __prompt_command()
             local Color_On=$Green
         elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
             local Color_On=$Purple
+        elif [[ "$git_status" =~ Untracked\ files: ]]; then
+            local Color_On=$Yellow
+        elif [[ "$git_status" =~ Changes\ not\ staged\ for ]]; then
+            local Color_On=$IRed
+        elif [[ "$git_status" =~ Changes\ to\ be\ committed ]]; then
+            local Color_On=$Cyan
         else
             local Color_On=$Red
         fi

@@ -90,7 +90,6 @@ function __prompt_command()
     #   Green   ->  clean
     #   purple  ->  untracked files
     #   cyan    ->  staged files
-    #   ired    ->  some staged, some modified
     #   yellow  ->  staged files, and some untracked
     #   red     ->  files to commit
     local git_status="`git status -unormal 2>&1`"
@@ -103,7 +102,7 @@ function __prompt_command()
         elif [[ "$git_status" =~ Untracked\ files: ]]; then
             local Color_On=$Yellow
         elif [[ "$git_status" =~ Changes\ not\ staged\ for ]]; then
-            local Color_On=$IRed
+            local Color_On=$Red
         elif [[ "$git_status" =~ Changes\ to\ be\ committed ]]; then
             local Color_On=$Cyan
         else

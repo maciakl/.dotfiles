@@ -159,6 +159,9 @@ alias ggrep="grep --recursive --line-number"
 # digg checks against opendns server
 alias digg="dig @208.67.222.222"
 
+# rot13 command
+alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
+
 ##### VIM ALIASES ####
 
 # Open in existing vim

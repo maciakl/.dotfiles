@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Run this on new machines to set up the environment
+
+H=$HOME
+V=$H/.vim
+S=$H/scripts
+B=$H/backup_dotfiles
+
+cd $H
+
+[ -d $S ] && mv $S $B/
+git clone https://github.com/maciakl/scripts.git
+
+[ -d "$V" ] && mv $V $B/
+[ -f "$H/.vimrc" ] && mv $H/.vimrc $B/
+
+git clone git@github.com:maciakl/.vim.git
+
+if [[ $(uname -s) == "CYGWIN"* ]]; then
+    cmd /c "mklink /h .vimrc .vim\.vimrc"
+else
+    ln -s $V/.vimrc .vimrc
+fi
+
+cd $V
+git submodule init
+git submodule update
+

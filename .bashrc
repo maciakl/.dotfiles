@@ -86,37 +86,39 @@ function __prompt_command()
     # basic information (user@host:path)
     PS1+="\[$BRed\]\u\[$Color_Off\]@\[$BRed\]\h\[$Color_Off\]:\[$BPurple\]\w\[$Color_Off\] "
 
-    # Display the branch name of git repository
-    #   Green   ->  clean
-    #   purple  ->  untracked files
-    #   cyan    ->  staged files
-    #   yellow  ->  staged files, and some untracked
-    #   red     ->  files to commit
-    local git_status="`git status -unormal 2>&1`"
+    if command -v git > /dev/null 2>&1; then
+        # Display the branch name of git repository
+        #   Green   ->  clean
+        #   purple  ->  untracked files
+        #   cyan    ->  staged files
+        #   yellow  ->  staged files, and some untracked
+        #   red     ->  files to commit
+        local git_status="`git status -unormal 2>&1`"
 
-    if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
-        if [[ "$git_status" =~ nothing\ to\ commit ]]; then
-            local Color_On=$Green
-        elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
-            local Color_On=$Purple
-        elif [[ "$git_status" =~ Untracked\ files: ]]; then
-            local Color_On=$Yellow
-        elif [[ "$git_status" =~ Changes\ not\ staged\ for ]]; then
-            local Color_On=$Red
-        elif [[ "$git_status" =~ Changes\ to\ be\ committed ]]; then
-            local Color_On=$Cyan
-        else
-            local Color_On=$Red
-        fi
-        if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
-            branch=${BASH_REMATCH[1]}
-        else
-            # Detached HEAD.  (branch=HEAD is a faster alternative.)
-            branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null ||
-                echo HEAD`)"
-        fi
+        if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
+            if [[ "$git_status" =~ nothing\ to\ commit ]]; then
+                local Color_On=$Green
+            elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
+                local Color_On=$Purple
+            elif [[ "$git_status" =~ Untracked\ files: ]]; then
+                local Color_On=$Yellow
+            elif [[ "$git_status" =~ Changes\ not\ staged\ for ]]; then
+                local Color_On=$Red
+            elif [[ "$git_status" =~ Changes\ to\ be\ committed ]]; then
+                local Color_On=$Cyan
+            else
+                local Color_On=$Red
+            fi
+            if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
+                branch=${BASH_REMATCH[1]}
+            else
+                # Detached HEAD.  (branch=HEAD is a faster alternative.)
+                branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null ||
+                    echo HEAD`)"
+            fi
 
-        PS1+="\[$Color_On\][$branch]\[$Color_Off\] "
+            PS1+="\[$Color_On\][$branch]\[$Color_Off\] "
+        fi
     fi
 
     # prompt $ or # for root

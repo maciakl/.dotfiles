@@ -86,7 +86,8 @@ function __prompt_command()
     # basic information (user@host:path)
     PS1+="\[$BRed\]\u\[$Color_Off\]@\[$BRed\]\h\[$Color_Off\]:\[$BPurple\]\w\[$Color_Off\] "
 
-    if command -v git > /dev/null 2>&1; then
+    if hash git 2>/dev/null; then
+
         # Display the branch name of git repository
         #   Green   ->  clean
         #   purple  ->  untracked files
@@ -96,6 +97,7 @@ function __prompt_command()
         local git_status="`git status -unormal 2>&1`"
 
         if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
+
             if [[ "$git_status" =~ nothing\ to\ commit ]]; then
                 local Color_On=$Green
             elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
@@ -109,6 +111,7 @@ function __prompt_command()
             else
                 local Color_On=$Red
             fi
+
             if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
                 branch=${BASH_REMATCH[1]}
             else

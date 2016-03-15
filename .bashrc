@@ -73,9 +73,12 @@ function __prompt_command()
 {
     # capture the exit status of the last command
     EXIT="$?"
+    HIST='$((\! -1))'
     PS1=""
 
-    if [ $EXIT -eq 0 ]; then PS1+="\[$Green\][\!]\[$Color_Off\] "; else  PS1+="\[$Red\][\!]\[$Color_Off\] "; fi
+    if [ $EXIT -eq 0 ]; then PS1+="\[$Green\][$EXIT]\[$Color_Off\] "; else  PS1+="\[$Red\][!$EXIT]\[$Color_Off\] "; fi
+
+    PS1+="\[$IBlue\]$HIST\[$Color_Off\] "
 
     # if logged in via ssh shows the ip of the client
     if [ -n "$SSH_CLIENT" ]; then PS1+="\[$Yellow\]("${SSH_CLIENT%% *}") \[$Color_Off\]"; fi

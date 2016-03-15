@@ -1,0 +1,25 @@
+alias chrome="run C:/Users/luke/AppData/Local/Google/Chrome/Application/chrome.exe"
+
+export JOURNAL_SEARCH=grep
+export PATH=$PATH:/cygdrive/c/Program\ Files/ISC\ BIND\ 9/bin
+
+# Imagemagic Cygwin installed from here: http://www.imagemagick.org/script/binary-releases.php
+export MAGICK_HOME="$HOME/imagemagic"
+export PATH="$MAGICK_HOME/bin:$PATH"
+
+
+alias jekyll="c:/Ruby193/bin/jekyll"
+alias rake="c:/Ruby193/bin/rake"
+alias npm="cmd /c npm"
+#alias vim='HOME=`cygpath -d $HOME` /cygdrive/c/Program\ Files\ \(x86\)/Vim/vim74/vim.exe'
+
+gvim () {  
+
+   oldhome=$HOME
+   oldvim=$VIM
+   HOME=`cygpath -d /cygdrive/c/Users/luke` 
+   VIM=`cygpath -d /cygdrive/c/Program\ Files\ \(x86\)/Vim`
+    /cygdrive/c/Program\ Files\ \(x86\)/Vim/vim74/gvim.exe $@ & 
+   HOME=$oldhome
+   VIM=$olvim
+}

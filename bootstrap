@@ -31,6 +31,12 @@ if [ $(uname -s) == "Darwin" ]; then
     ln -s $D/.profile_mac $H/.profile
 fi
 
+if [[ $(uname -s) == "CYGWIN"* ]];then
+
+    if [ -f $H/.bashrc_local ]; then mv $H/.bashrc_local $B/.bashrc_local; fi
+    ln -s $D/.bashrc_cygwin $H/.bashrc_local
+fi
+
 # special rules for bashrc (respect local)
 if [ -f $B/.bashrc ]; then
     # if bashrc exists, use it but source the dotfiles one first

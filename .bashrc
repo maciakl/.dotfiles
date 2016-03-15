@@ -138,10 +138,17 @@ if [ "$TERM" != "dumb" ]; then
     command -v dircolors >/dev/null 2>&1 && eval "`dircolors -b`"
     
     # force ls to always use color and typ indicators
-    alias ls='ls -hF --color=auto'
+    if ls --color -d . >/dev/null 2>&1; then 
+        # Gnu LS
+        alias ls='ls -hF --color=auto'
+        alias dir='ls --color=auto --format=long'
+    else
+        #BSD LS
+        alias ls='ls -hFG'
+        alias dir='ls -lG'
+    fi
 
     # make the dir command work kinda like in windows (long format)
-    alias dir='ls --color=auto --format=long'
 fi
 
 # if ~/scripts exists, add it to the path

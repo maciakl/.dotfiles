@@ -177,6 +177,22 @@ alias digg="dig @208.67.222.222"
 # rot13 command
 alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
 
+# aes using openssl
+function aes {
+
+    if [[ $# -eq 0 ]]; then
+        echo -e "\nUsing openssl aes-256-cbc\n"
+        echo -e "Usage:"
+        echo -e "\t -in <file>   \t input file"
+        echo -e "\t -out <file>  \t output file"
+        echo -e "\t -d           \t decrypt"
+        echo -e "\t -a           \t use base64\n"
+    else
+        openssl aes-256-cbc $*
+    fi
+
+}
+
 ##### VIM ALIASES ####
 
 # Open in existing vim

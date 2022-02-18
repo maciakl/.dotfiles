@@ -99,7 +99,7 @@ function __prompt_command()
         #   red     ->  files to commit
         local git_status="`git status -unormal 2>&1`"
 
-        if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
+        if ! [[ "$git_status" =~ not\ a\ git\ repo ]]; then
 
             if [[ "$git_status" =~ nothing\ to\ commit ]]; then
                 local Color_On=$Green
